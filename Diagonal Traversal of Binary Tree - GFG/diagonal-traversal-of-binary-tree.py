@@ -11,31 +11,24 @@ class Node:
 #Complete the function below
 class Solution:
     def diagonal(self,root):
-        d={}
-        def traverse(root,tag):
-            if root!=[]:
-                if tag in d:
-                    d[tag].append(root.data)
-                else:
-                    d[tag]=[root.data]
-                
-                if root.left:
-                    traverse(root.left,tag-1)
-                if root.right:
-                    traverse(root.right,tag)
-        traverse(root,0)
+        res=[]
+        q=[]
+        q.append(root)
         
-        k=sorted(d.items(),key=lambda x:-x[0])
-        ans=[]
-        for i,j in k:
-            ans.extend(j)
-        return ans
+        def traverse(node):
+            if node!=None:
+                res.append(node.data)
+                if node.left:
+                    q.append(node.left)
+                if node.right:
+                    traverse(node.right)
+        while(q!=[]):
+            x=q.pop(0)
+            traverse(x)
+            
+        return res
+            
         
-        
-
-
-
-
 #{ 
  # Driver Code Starts
 #Initial Template for Python 3
